@@ -1,0 +1,750 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ALRAYAN</title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abel">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sacramento">
+
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.3/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <link rel="stylesheet" href="css/main-style.css">
+    <link rel="stylesheet" href="css/ionicons.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800');
+    @font-face
+    {
+        font-family: 'Beyond';
+        src: url('fonts/beyond_the_mountains.otf')  format('truetype'),
+        url('fonts/beyond_the_mountains.ttf')  format('opentype');
+    }
+
+
+</style>
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Dancing+Script:700);
+        @import url(https://fonts.googleapis.com/css?family=Crimson+Text:400,600,700,400italic);
+        @import url('https://fonts.googleapis.com/css?family=Codystar:300&display=swap');
+
+        /* popup */
+
+        .popup{
+            width: 100%;
+            height: 100vh;
+            display: none;
+
+            position: fixed;
+            top: 0;
+            right: 0;
+        }
+
+        #popup-article:target{
+            display: flex;
+        }
+
+        .popup::before{
+            content: "";
+            box-sizing: border-box;
+            width: 100%;
+            background:linear-gradient(to right, rgb(40,183,141), rgb(255,222,89));
+
+
+            position: fixed;
+            left: 0;
+            top: 50%;
+            will-change: height, top;
+            animation: open-animation .6s cubic-bezier(0.83, 0.04, 0, 1.16) .65s both;
+        }
+
+        .popup::after{
+            content: "";
+            width: 0;
+            height: 2px;
+            background:linear-gradient(to right, rgb(40,183,141), rgb(255,222,89));
+
+            will-change: width, opacity;
+            animation: line-animation .6s cubic-bezier(0.83, 0.04, 0, 1.16) both;
+
+            position: absolute;
+            top: 50%;
+            left: 0;
+            margin-top: -1px;
+        }
+
+        @keyframes line-animation{
+
+            0%{
+                width: 0;
+                opacity: 1;
+            }
+
+            99%{
+                width: 100%;
+                opacity: 1;
+            }
+
+            100%{
+                width: 100%;
+                opacity: 0;
+            }
+        }
+
+        @keyframes open-animation{
+
+            0%{
+                height: 0;
+                top: 50%;
+            }
+
+            100%{
+                height: 100vh;
+                top: 0;
+            }
+        }
+
+        .popup__block{
+            height: calc(100vh - 40px);
+            padding: 5% 15%;
+            box-sizing: border-box;
+            position: relative;
+
+            margin: auto;
+            overflow: auto;
+            animation: fade .5s ease-out 1.3s both;
+        }
+
+        @keyframes fade{
+
+            0%{
+                opacity: 0;
+            }
+
+            100%{
+                opacity: 1;
+            }
+        }
+
+        .popup__title{
+            font-size: 50px;
+            margin: 0 0 0.5em;
+            font:38px 'Dancing Script', cursive;
+        }
+
+        .popup__close{
+            width: 2rem;
+            height: 2rem;
+            text-indent: -9999px;
+
+            position: fixed;
+            top: 20px;
+            right: 20px;
+
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: contain;
+            background-image: url(data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjMDAwMDAwIiBoZWlnaHQ9IjI0IiB2aWV3Qm94PSIwIDAgMjQgMjQiIHdpZHRoPSIyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4gICAgPHBhdGggZD0iTTE5IDYuNDFMMTcuNTkgNSAxMiAxMC41OSA2LjQxIDUgNSA2LjQxIDEwLjU5IDEyIDUgMTcuNTkgNi40MSAxOSAxMiAxMy40MSAxNy41OSAxOSAxOSAxNy41OSAxMy40MSAxMnoiLz4gICAgPHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPjwvc3ZnPg==);
+        }
+
+        /*
+        * demo page
+        */
+
+        .bd{
+            font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Open Sans, Ubuntu, Fira Sans, Helvetica Neue, sans-serif;
+            font-size: 1rem;
+            color: #222;
+            margin: 0;
+        }
+        .up{
+            z-index:1000; position: fixed;
+        }
+
+        .pp{
+            margin: 0;
+            line-height: 1.5;
+            font-size: 15px;
+        }
+
+        p:nth-child(n+2){
+            margin-top: 1rem;
+        }
+
+        .open-popup{
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+
+        .page{
+            display: flex;
+        }
+
+        .page__container{
+            max-width: 1200px;
+            padding-left: .75rem;
+            padding-right: .75rem;
+            margin: auto;
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+<header class="header">
+
+
+    <div class="container">
+        <nav class="nav">
+            <a href="index.html" class="logo">
+                <img src="alrayanimg/White and Green Bar Graph Music Dj Logo (6).png" alt="">
+            </a>
+            <div class="hamburger-menu">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-times"></i>
+            </div>
+            <ul class="nav-list">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-shop" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M2.97 1.35A1 1 0 0 1 3.73 1h8.54a1 1 0 0 1 .76.35l2.609 3.044A1.5 1.5 0 0 1 16 5.37v.255a2.375 2.375 0 0 1-4.25 1.458A2.371 2.371 0 0 1 9.875 8 2.37 2.37 0 0 1 8 7.083 2.37 2.37 0 0 1 6.125 8a2.37 2.37 0 0 1-1.875-.917A2.375 2.375 0 0 1 0 5.625V5.37a1.5 1.5 0 0 1 .361-.976l2.61-3.045zm1.78 4.275a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 1 0 2.75 0V5.37a.5.5 0 0 0-.12-.325L12.27 2H3.73L1.12 5.045A.5.5 0 0 0 1 5.37v.255a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0zM1.5 8.5A.5.5 0 0 1 2 9v6h1v-5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v5h6V9a.5.5 0 0 1 1 0v6h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1V9a.5.5 0 0 1 .5-.5zM4 15h3v-5H4v5zm5-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3zm3 0h-2v3h2v-3z"/>
+                    </svg> Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="about.html" class="nav-link" data-target="#exampleModal"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-clipboard-data" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+                        <path fill-rule="evenodd" d="M9.5 1h-3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+                        <path d="M4 11a1 1 0 1 1 2 0v1a1 1 0 1 1-2 0v-1zm6-4a1 1 0 1 1 2 0v5a1 1 0 1 1-2 0V7zM7 9a1 1 0 0 1 2 0v3a1 1 0 1 1-2 0V9z"/>
+                    </svg> About</a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#cont" class="nav-link"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                    </svg> Contact us</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 0 0 8 15a6.987 6.987 0 0 0 5.468-2.63z"/>
+                        <path fill-rule="evenodd" d="M8 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                        <path fill-rule="evenodd" d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"/>
+                    </svg> Admin</a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="php/register.php">Log in</a>
+                        <!--  <div class="dropdown-divider"></div>
+                         <a class="dropdown-item" href="#">Something else here</a>-->
+                    </div>
+                </li>
+
+
+            </ul>
+
+
+        </nav>
+
+
+
+    </div>
+
+</header>
+<div id="load"></div>
+<div id="contentss">
+
+
+
+
+
+    <main>
+
+        <div class="swiper-container s1">
+            <div class="swiper-wrapper">
+
+                <div class="swiper-slide s">
+                    <div class="hero">
+                        <div class="container">
+                            <div class="main-heading">
+                                <h1 class="title" style="font-weight: 900;">AL-RAYAN</h1>
+                                <h2 class="subtitle" style="font-family: 'Beyond';">hotel & resort</h2>
+                            </div>
+                            <a href="index.html" class="btn btn-gradient">
+                                Explore now
+
+                                <span class="dots"><i class="fas fa-ellipsis-h"></i></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="swiper-slide s">
+
+                    <div class="heroo">
+                        <div class="container">
+                            <div class="main-heading">
+                                <h1 class="title" style="font-weight: 900;">AL-RAYAN</h1>
+                                <h2 class="subtitle" style="font-family: 'Beyond';">hotel & resort</h2>
+                            </div>
+                            <a href=index.html" class="btn btn-gradient">
+                                Explore now
+                                <span class="dots"><i class="fas fa-ellipsis-h"></i></span>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="swiper-slide s">
+
+                    <div class="herooo">
+                        <div class="container">
+                            <div class="main-heading">
+                                <h1 class="title" style="font-weight: 900;">AL-RAYAN</h1>
+                                <h2 class="subtitle" style="font-family: 'Beyond';">hotel & resort</h2>
+                            </div>
+                            <a href="h" class="btn btn-gradient">
+                                Explore now
+                                <span class="dots"><i class="fas fa-ellipsis-h"></i></span>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="swiper-slide s">
+                    <div class="heroooo">
+                        <div class="container">
+
+                            <div class="main-heading">
+                                <h1 class="title" style="font-weight: 900;">AL-RAYAN</h1>
+                                <h2 class="subtitle" style="font-family: 'Beyond';">hotel & resort</h2>
+                            </div>
+                            <a href="#" class="btn btn-gradient">
+                                Explore now
+                                <span class="dots"><i class="fas fa-ellipsis-h"></i></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination"></div>
+            <!-- Add Arrows -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+
+
+
+
+
+        <!--
+            <div class="hero">
+                <div class="container">
+                    <div class="main-heading">
+                        <h1 class="title">AL-RAYAN</h1>
+                        <h2 class="subtitle">hotel & resort</h2>
+                    </div>
+                    <a hreg="#" class="btn btn-gradient">
+                        Explore now
+                        <span class="dots"><i class="fas fa-ellipsis-h"></i></span>
+                    </a>
+                </div>
+            </div> -->
+
+
+        <section class="booking">
+            <div class="container">
+                    <!--
+                     <div class="input-group">
+                         <label for="destination" class="input-label">Destination</label>
+                        <input type="text" class="input" id="destination">
+                     </div>
+                    -->
+
+            </div>
+        </section>
+
+
+        <section class="hotels">
+            <div class="container">
+                <h5 class="section-head">
+                    <span class="heading">We Have The Best Services!</span>
+                    <span class="sub-heading">Our rendered services in the hotel</span>
+                </h5>
+                <div class="grid">
+
+
+
+
+
+
+                    <div class="grid-item featured-hotels">
+                        <img src="alrayanimg/10908.jpg" alt="" class="hotel-image">
+                        <h5 class="hotel-name" style="font-weight: 900">Our Restaurant</h5>
+                        <!--
+                      <span class="hotel-price">From $200/Night</span>
+                                   -->
+
+
+                        <div class="hotel-rating">
+                            <i class="fas fa-star rating"></i>
+                            <i class="fas fa-star rating"></i>
+                            <i class="fas fa-star rating"></i>
+                            <i class="fas fa-star rating"></i>
+                            <i class="fas fa-star-half rating"></i>
+
+                        </div>
+
+                        <a href="restaurent.html" class="btn btn-gradient" style="font-weight: 900">View
+                            <span class="dots"><i class="fas fa-ellipsis-h"></i></span>
+                        </a>
+
+                    </div>
+                    <div class="grid-item featured-hotels">
+                        <img src="alrayanimg/bangkokrush-XoVNpEpd3v4-unsplash.jpg" alt="" class="hotel-image">
+                        <h5 class="hotel-name" style="font-weight: 900">Our Pool</h5>
+                        <div class="hotel-rating">
+                            <i class="fas fa-star rating"></i>
+                            <i class="fas fa-star rating"></i>
+                            <i class="fas fa-star rating"></i>
+                            <i class="fas fa-star rating"></i>
+                            <i class="fas fa-star-half rating"></i>
+
+
+
+                        </div>
+                        <a href="pool.html" class="btn btn-gradient" style="font-weight: 900">View
+                            <span class="dots"><i class="fas fa-ellipsis-h"></i></span>
+                        </a>
+                    </div>
+                    <div class="grid-item featured-hotels">
+                        <img src="alrayanimg/ruben-dos-santos-DROwSrK20nE-unsplash.jpg" alt="" class="hotel-image">
+                        <h5 class="hotel-name" style="font-weight: 900">Our Services</h5>
+                        <div class="hotel-rating">
+                            <i class="fas fa-star rating"></i>
+                            <i class="fas fa-star rating"></i>
+                            <i class="fas fa-star rating"></i>
+                            <i class="fas fa-star rating"></i>
+                            <i class="fas fa-star-half rating"></i>
+
+                        </div>
+
+                        <div class="page">
+                            <div class="page__container">
+                        <a href="#popup-article" class="btn btn-gradient open-popup" style="font-weight: 900">view
+                            <span class="dots"><i class="fas fa-ellipsis-h"></i></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </section>
+
+
+
+
+
+        <section class="offer">
+            <div class="container">
+                <div class="offer-content">
+                    <div class="discount">
+                        40% off
+                    </div>
+                    <h5 class="hotel-name">Ready for great holiday?</h5>
+                    <p class="paragraph">
+                        Our final goal, mission and vision is to offer you an unforgettable experience and make sure you feel so good that you want to return as soon as possible.
+                        Our hotel rooms have everything you need for a pleasant stay.</p>
+                    <a href="#rooms" class="btn btn-gradient">See Our Rooms
+                        <span class="dots"><i class="fas fa-ellipsis-h"></i></span>
+                    </a>
+                </div>
+            </div>
+
+        </section>
+
+
+
+        <section class="rooms" id="rooms">
+            <div class="container">
+                <h5 class="section-head">
+                    <spasn class="heading">Luxurious</spasn>
+
+                    <span class="sub-heading">Affordable rooms</span>
+                </h5>
+                <div class="swiper-container s2">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="imgBx">
+                                <img class="photo" src="alrayanimg/room-6.jpg">
+                            </div>
+                            <div class="room-info-wrap">
+                                <h3 class="room-name">King Room<br></h3>
+                                <span class="room-price">240.00$<span class="per-night"> Per Night</span></span>
+                                <i class="fas fa-star rating"></i>
+                                <i class="fas fa-star rating"></i>
+                                <i class="fas fa-star rating"></i>
+                                <i class="fas fa-star rating"></i>
+                                <i class="fas fa-star rating"></i>
+
+                                <p class="paragraph"> <br/>Lorem ipsum dolor sit  optio pariatur quas quos repellat sint soluta temporibus.</p>
+                                <a href="php/register.php" class="btn rooms-btn">Book now &rarr;</a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="imgBx">
+                                <img class="photo" src="alrayanimg/room-1.jpg">
+                            </div>
+                            <div class="room-info-wrap">
+                                <h3 class="room-name">Single Room<br></h3>
+                                <span class="room-price">100.00$<span class="per-night"> Per Night</span></span>
+                                <i class="fas fa-star rating"></i>
+                                <i class="fas fa-star rating"></i>
+                                <i class="fas fa-star rating"></i>
+                                <i class="fas fa-star rating"></i>
+                                <i class="fas fa-star rating"></i>
+
+                                <p class="paragraph"> <br/>Lorem ipsum dolor sit  optio pariatur quas quos repellat sint soluta temporibus.</p>
+                                <a href="php/register.php" class="btn rooms-btn">Book now &rarr;</a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="imgBx">
+                                <img class="photo" src="alrayanimg/room-2.jpg">
+                            </div>
+                            <div class="room-info-wrap">
+                                <h3 class="room-name">Family Room<br></h3>
+                                <span class="room-price">350.00$<span class="per-night"> Per Night</span></span>
+                                <i class="fas fa-star rating"></i>
+                                <i class="fas fa-star rating"></i>
+                                <i class="fas fa-star rating"></i>
+                                <i class="fas fa-star rating"></i>
+                                <i class="fas fa-star rating"></i>
+
+                                <p class="paragraph"> <br/>Lorem ipsum dolor sit  optio pariatur quas quos repellat sint soluta temporibus.</p>
+                                <a href="php/register.php" class="btn rooms-btn">Book now &rarr;</a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="imgBx">
+                                <img class="photo" src="alrayanimg/room-3.jpg">
+                            </div>
+                            <div class="room-info-wrap">
+                                <h3 class="room-name">Deluxe Room<br></h3>
+                                <span class="room-price">198.00$<span class="per-night"> Per Night</span></span>
+                                <i class="fas fa-star rating"></i>
+                                <i class="fas fa-star rating"></i>
+                                <i class="fas fa-star rating"></i>
+                                <i class="fas fa-star rating"></i>
+                                <i class="fas fa-star rating"></i>
+
+                                <p class="paragraph"> <br/>Lorem ipsum dolor sit  optio pariatur quas quos repellat sint soluta temporibus.</p>
+                                <a href="php/register.php" class="btn rooms-btn">Book now &rarr;</a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="imgBx">
+                                <img class="photo" src="alrayanimg/room-4.jpg">
+                            </div>
+                            <div class="room-info-wrap">
+                                <h3 class="room-name">Luxury Room<br></h3>
+                                <span class="room-price">120.00$<span class="per-night"> Per Night</span></span>
+                                <i class="fas fa-star rating"></i>
+                                <i class="fas fa-star rating"></i>
+                                <i class="fas fa-star rating"></i>
+                                <i class="fas fa-star rating"></i>
+                                <i class="fas fa-star rating"></i>
+
+                                <p class="paragraph"> <br/>Lorem ipsum dolor sit  optio pariatur quas quos repellat sint soluta temporibus.</p>
+                                <a href="php/register.php" class="btn rooms-btn">Book now &rarr;</a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="imgBx">
+                                <img class="photo" src="alrayanimg/room-5.jpg">
+                            </div>
+                            <div class="room-info-wrap">
+                                <h3 class="room-name">Superior Room<br></h3>
+                                <span class="room-price">250.00$<span class="per-night"> Per Night</span></span>
+                                <i class="fas fa-star rating"></i>
+                                <i class="fas fa-star rating"></i>
+                                <i class="fas fa-star rating"></i>
+                                <i class="fas fa-star rating"></i>
+                                <i class="fas fa-star rating"></i>
+
+                                <p class="paragraph"> <br/>Lorem ipsum dolor sit  optio pariatur quas quos repellat sint soluta temporibus.</p>
+                                <a href="php/register.php" class="btn rooms-btn">Book now &rarr;</a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="imgBx">
+                                <img class="photo" src="alrayanimg/room-3.jpg">
+                            </div>
+                            <div class="room-info-wrap">
+                                <h3 class="room-name">Deluxe Room<br></h3>
+                                <span class="room-price">198.00$<span class="per-night"> Per Night</span></span>
+                                <i class="fas fa-star rating"></i>
+                                <i class="fas fa-star rating"></i>
+                                <i class="fas fa-star rating"></i>
+                                <i class="fas fa-star rating"></i>
+                                <i class="fas fa-star rating"></i>
+
+                                <p class="paragraph"> <br/>Capacity: 2 person. <br/>Bed: King bed.<br/> Services: Wi-Fi, TV, Bathroom.</p>
+                                <a href="php/register.php" class="btn rooms-btn">Book now &rarr;</a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+
+
+
+        <section class="contact">
+            <div class="container">
+                <h5 class="section-head">
+                    <span class="heading" id="cont">Contact</span>
+                    <span class="sub-heading">Get in touch with us & leave your feedback</span>
+                </h5>
+                <div class="contact-content">
+                    <div class="traveler-wrap">
+                        <img src="alrayanimg/build2.png" alt="">
+                    </div>
+                    <form action="mailto:waedbkh@gmail.com" method="GET" class="form contact-form">
+                        <div class="input-group-wrap">
+                            <div class="input-group">
+                                <input name="Name" type="text" class="input" placeholder="Name" required>
+                                <span class="bar"></span>
+
+                            </div>
+                            <div class="input-group">
+                                <input name="to" type="email" class="input" placeholder="E-mail" required>
+                                <span class="bar"></span>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <input name="Subject" type="text" class="input" placeholder="Subject" required>
+                            <span class="bar"></span>
+                        </div>
+                        <div class="input-group">
+                            <textarea name="body" class="input" cols="30" rows="8" placeholder="Message" required></textarea>
+                            <span class="bar"></span>
+
+                        </div>
+                        <button type="submit" class="btn form-btn btn-purple">Send Message
+                            <span class="dots"><i class="fas fa-ellipsis-h"></i></span>
+                        </button>
+
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-content-brand">
+                    <a href="index.html" class="logoo">
+                        <img class="logo-image" src="alrayanimg/log.png" alt="">
+                    </a>
+                    <div class="paragraph" style="font-family: 'Sacramento'; font-size:25px;">
+                        All copyright © 2020 are for Web Project Done by (Wa'ed Khalifa)
+
+                    </div>
+                </div>
+                <div class="social-media-wrap">
+                    <h4 class="footer-heading">Follow us</h4>
+                    <div class="social-media">
+                        <a href="#" class="sm-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="sm-link"><i class="fab fa-facebook-square"></i></a>
+                        <a href="#" class="sm-link"><i class="fab fa-instagram"></i></a>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="../package/swiper-bundle.min.js"></script>
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
+
+
+    <script src="plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+    <script src="plugins/easing/easing.js"></script>
+    <script src="js/custom.js"></script>
+</div>
+</body>
+</html>
+<div class="up bd">
+<div id="popup-article" class="popup">
+    <div class="popup__block">
+        <h1 class="popup__title" style="font-size: 60px;">Services and Facilities
+           <small style="color:grey; font-size:25px" > Exceptional service - endless possibilities</small></h1>
+        <p class="pp" style="font-family:'Abel'; font-size: 20px;">Whether you are travelling for business or pleasure, the luxury hotel services offered by the five star Al Rayan Hotel make it an ideal choice for your stay in Nablus, Palestine. The hotel’s luxurious surroundings, comfort, thoughtful touches and a personalized service sets it apart from any other hotel, allowing you to feel like being at home from your very first steps into the hotel.
+
+            We are geared towards the fulfilment of the needs of any discerning guest and below you can find an alphabetical overview of the most commonly-used services and facilities offered by our boutique hotel.</p>
+       <div>
+        <div style="float:left">
+         <br><p style="font:38px 'Dancing Script', cursive;">Hotel Services:</p>
+        <ul style="list-style-image: url('alrayanimg/squar.png'); font-size: 18px; font-family:'Abel'; ">
+             <li>Car rental services</li>
+             <li>Catering services</li>
+             <li>Concierge services</li>
+             <li>Courier services</li>
+             <li>Dry cleaning</li>
+             <li>Excursions and guided tours</li>
+             <li>Ironing service</li>
+             <li>Mail services</li>
+             <li>Massages</li>
+             <li> Room service (24-hour)</li>
+             <li>Parking</li>
+
+
+         </ul>
+        </div>
+        <div style="float:left; padding-left: 200px; padding-top: 28px">
+            <p style="font:38px 'Dancing Script', cursive;">Hotel Facilities:</p>
+            <ul style="list-style-image: url('alrayanimg/squar.png'); font-size: 18px; font-family:'Abel';">
+
+            <li>Computer facility</li>
+            <li>Conference and meeting facilities</li>
+            <li>Fitness room</li>
+            <li>Health club</li>
+            <li>Sauna and steam bath</li>
+            <li>Lounge</li>
+            <li>Luggage storage</li>
+            <li>Non-smoking rooms</li>
+            <li>Parking outside the hotel at an extra charge</li>
+            <li>Restaurant</li>
+            <li>Summer terrace</li>
+            <li>Complimentary Wi-Fi internet throughout the entire hotel</li>
+            </ul>
+        </div>
+       </div>
+        <a href="#" class="popup__close">close</a>
+    </div>
+</div>
+</div>

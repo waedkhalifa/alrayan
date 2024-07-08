@@ -1,0 +1,671 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ALRAYAN</title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Indie Flower">
+
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sacramento">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.3/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <link rel="stylesheet" href="css/main-style.css">
+    <link rel="stylesheet" href="css/ionicons.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
+    <style>
+        .regist{
+            width:75%;
+            height: 500px;
+            margin-left: 50px;
+            position: center;
+            border-radius: 50px;
+        }
+        .txtt{
+            margin-left: 900px;
+        }
+        @import url('https://fonts.googleapis.com/css?family=Raleway');
+
+        :root, button{
+        }
+
+        *{
+            box-sizing: border-box;
+        }
+
+        .color{
+            background: linear-gradient(to right, #e1e0ff, #d7fadd);
+        }
+        .h{
+            background: linear-gradient(rgba(255,222,89,0.8),rgba(40,183,141,0.8));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        body{
+            background: #191919;
+            background: white;
+            user-select: none;
+            color: #b9b9b9;
+        }
+
+        h1{
+            padding-bottom: 40px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 16px;
+        }
+
+        p{
+            padding-bottom: 15px;
+        }
+
+        p:last-of-type{
+            padding-bottom: 0;
+        }
+
+        .try-again{
+            cursor: pointer;
+            position: relative;
+            font-size: 16px;
+        }
+
+        .try-again:after{
+            content: '';
+            position: absolute;
+            left: 15px;
+            right: 15px;
+            height: 1px;
+            top: 100%;
+            background: #ebebeb;
+            margin-top: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .try-again:hover:after{
+            left: 40%;
+            right: 40%;
+        }
+
+        .wrapper{
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .button{
+            cursor: pointer;
+            position: relative;
+            z-index: 2;
+            -webkit-appearance: none;
+            background: none;
+            outline: none;
+            border: none;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            border-radius: 2px;
+            transition: all 0.5s ease;
+            font-weight: 600;
+            font-size: 14px;
+            height: 60px;
+            width: 110px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(0,0,0,0.06);
+            border-radius: 0px;
+            box-shadow: 0 0 0 white, 0 0 0 white;
+        }
+
+        .button-text{
+            display: inline-block;
+            position: relative;
+            z-index: 2;
+            background:linear-gradient(to right, rgba(40,183,141,0.8), rgba(255,222,89,0.8));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .button-circle{
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 6px;
+            width: 6px;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #28B78D, 0 0 20px #28B78D, 0 0 30px #28B78D;
+            transition: all 0.5s ease;
+        }
+
+        .button-circle2{
+            top: auto;
+            bottom: 0;
+        }
+
+        .button-circle3{
+            left: auto;
+            right: 0;
+            box-shadow: 0 0 10px #ffde59, 0 0 20px #ffde59, 0 0 30px #ffde59;
+        }
+
+        .button-circle4{
+            left: auto;
+            top: auto;
+            bottom: 0;
+            right: 0;
+            box-shadow: 0 0 10px #ffde59, 0 0 20px #ffde59, 0 0 30px #ffde59;
+        }
+
+        .button:hover{
+            box-shadow: -15px 0 70px -15px #28B78D, 15px 0 70px -15px #ffde59;
+        }
+
+        .button:hover .button-circle1{
+            transform: translate(-15px, -15px) scale(0);
+        }
+
+        .button:hover .button-circle2{
+            transform: translate(-15px, 15px) scale(0);
+        }
+
+        .button:hover .button-circle3{
+            transform: translate(15px, -15px) scale(0);
+        }
+
+        .button:hover .button-circle4{
+            transform: translate(15px, 15px) scale(0);
+        }
+
+        .button:hover .button-circle{
+            box-shadow: none;
+        }
+
+        .popup{
+            opacity: 0;
+            visibility: hidden;
+            height: 400px;
+            width: 400px;
+            flex-shrink: 0;
+            border-radius: 3px;
+            position: relative;
+            z-index: 3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease
+        }
+
+        .popup-inside{
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            border-radius: 50%;
+            box-shadow: 0 0 0 black;
+            transition:
+                    box-shadow 0.5s ease 0.7s,
+                    border-radius 0.35s ease 0.7s;
+        }
+
+        .backgrounds{
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .background{
+            --offset: 0;
+            position: absolute;
+            left: var(--offset);
+            right: var(--offset);
+            bottom: var(--offset);
+            top: var(--offset);
+            background:linear-gradient(to right, rgba(40,183,141,0.8), rgba(255,222,89,0.8));
+            transform: scale(0);
+            transition: all 0.5s ease 0s;
+            border-radius: 50%;
+        }
+
+        .background2{
+            --offset: 10%;
+            position: absolute;
+            left: var(--offset);
+            right: var(--offset);
+            bottom: var(--offset);
+            top: var(--offset);
+            background:linear-gradient(to right, rgba(40,183,141,0.8), rgba(255,222,89,0.8));
+            transform: scale(0);
+            transition: all 0.5s ease 0.1s;
+        }
+
+        .background3{
+            --offset: 20%;
+            position: absolute;
+            left: var(--offset);
+            right: var(--offset);
+            bottom: var(--offset);
+            top: var(--offset);
+            background:linear-gradient(to right, rgba(97, 243, 200, 0.8), rgba(245, 221, 126, 0.8));
+            z-index: 2;
+            transition: all 0.5s ease 0.2s;
+        }
+
+        .background4{
+            --offset: 30%;
+            position: absolute;
+            left: var(--offset);
+            right: var(--offset);
+            bottom: var(--offset);
+            top: var(--offset);
+            background:linear-gradient(to right, rgba(154, 250, 222, 0.8), rgba(250, 234, 172, 0.8));
+            z-index: 3;
+            transition: all 0.5s ease 0.3s;
+        }
+
+        .background5{
+            --offset: 40%;
+            position: absolute;
+            left: var(--offset);
+            right: var(--offset);
+            bottom: var(--offset);
+            top: var(--offset);
+            background:linear-gradient(to right, rgba(188, 243, 227, 0.8), rgba(246, 236, 194, 0.8));
+            z-index: 4;
+            transition: all 0.5s ease 0.4s;
+        }
+
+        .background6{
+            --offset: 40%;
+            position: absolute;
+            left: var(--offset);
+            right: var(--offset);
+            bottom: var(--offset);
+            top: var(--offset);
+            background: white;
+            z-index: 5;
+            transition: all 0.8s ease 0.4s;
+        }
+
+        .content{
+            --offset: 0;
+            position: absolute;
+            left: var(--offset);
+            right: var(--offset);
+            bottom: var(--offset);
+            top: var(--offset);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.35s ease 0.75s;
+            z-index: 10;
+        }
+
+        .content-wrapper{
+            text-align: center;
+        }
+
+        body.active .content{
+            opacity: 1;
+            transform: none;
+        }
+
+        body.active .popup{
+            opacity: 1;
+            visibility: visible;
+        }
+
+        body.active .popup-inside{
+            border-radius: 0;
+            box-shadow: -50px 0 200px -50px #129f75, 50px 0 200px -50px #ffde59;
+        }
+
+        body.active .background{
+            transform: scale(1);
+        }
+
+        body.active .background6{
+            transform: scale(8);
+        }
+
+        @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800');
+        @font-face
+        {
+            font-family: 'Beyond';
+            src: url('fonts/beyond_the_mountains.otf')  format('truetype'),
+            url('fonts/beyond_the_mountains.ttf')  format('opentype');
+        }
+
+
+
+    </style>
+</head>
+<body>
+
+
+<header class="header">
+
+
+    <div class="container">
+        <nav class="nav">
+            <a href="index.html" class="logo">
+                <img src="alrayanimg/White and Green Bar Graph Music Dj Logo (6).png" alt="">
+            </a>
+            <div class="hamburger-menu">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-times"></i>
+            </div>
+            <ul class="nav-list">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-shop" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M2.97 1.35A1 1 0 0 1 3.73 1h8.54a1 1 0 0 1 .76.35l2.609 3.044A1.5 1.5 0 0 1 16 5.37v.255a2.375 2.375 0 0 1-4.25 1.458A2.371 2.371 0 0 1 9.875 8 2.37 2.37 0 0 1 8 7.083 2.37 2.37 0 0 1 6.125 8a2.37 2.37 0 0 1-1.875-.917A2.375 2.375 0 0 1 0 5.625V5.37a1.5 1.5 0 0 1 .361-.976l2.61-3.045zm1.78 4.275a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 1 0 2.75 0V5.37a.5.5 0 0 0-.12-.325L12.27 2H3.73L1.12 5.045A.5.5 0 0 0 1 5.37v.255a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0zM1.5 8.5A.5.5 0 0 1 2 9v6h1v-5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v5h6V9a.5.5 0 0 1 1 0v6h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1V9a.5.5 0 0 1 .5-.5zM4 15h3v-5H4v5zm5-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3zm3 0h-2v3h2v-3z"/>
+                    </svg> Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="about.html" class="nav-link" data-target="#exampleModal"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-clipboard-data" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+                        <path fill-rule="evenodd" d="M9.5 1h-3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+                        <path d="M4 11a1 1 0 1 1 2 0v1a1 1 0 1 1-2 0v-1zm6-4a1 1 0 1 1 2 0v5a1 1 0 1 1-2 0V7zM7 9a1 1 0 0 1 2 0v3a1 1 0 1 1-2 0V9z"/>
+                    </svg> About</a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="index.html#cont" class="nav-link"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                    </svg> Contact us</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 0 0 8 15a6.987 6.987 0 0 0 5.468-2.63z"/>
+                        <path fill-rule="evenodd" d="M8 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                        <path fill-rule="evenodd" d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"/>
+                    </svg> Admin</a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="php/register.php">Log in</a>
+
+                    </div>
+                </li>
+
+
+            </ul>
+
+
+        </nav>
+
+
+
+    </div>
+
+</header>
+<div id="load"></div>
+<div id="contentss">
+
+
+
+
+
+    <main>
+
+        <div class="swiper-container s1">
+            <div class="swiper-wrapper">
+
+                <div class="swiper-slide s">
+                    <div class="hero">
+                        <div class="container">
+                            <div class="main-heading">
+                                <h1 class="title" style="font-weight: 900;">AL-RAYAN</h1>
+                                <h2 class="subtitle" style="font-family: 'Beyond';">hotel & resort</h2>
+                            </div>
+                            <a href="index.html" class="btn btn-gradient">
+                                Explore now
+
+                                <span class="dots"><i class="fas fa-ellipsis-h"></i></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="swiper-slide s">
+
+                    <div class="heroo">
+                        <div class="container">
+                            <div class="main-heading">
+                                <h1 class="title" style="font-weight: 900;">AL-RAYAN</h1>
+                                <h2 class="subtitle" style="font-family: 'Beyond';">hotel & resort</h2>
+                            </div>
+                            <a href=index.html" class="btn btn-gradient">
+                                Explore now
+                                <span class="dots"><i class="fas fa-ellipsis-h"></i></span>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="swiper-slide s">
+
+                    <div class="herooo">
+                        <div class="container">
+                            <div class="main-heading">
+                                <h1 class="title" style="font-weight: 900;">AL-RAYAN</h1>
+                                <h2 class="subtitle" style="font-family: 'Beyond';">hotel & resort</h2>
+                            </div>
+                            <a href="h" class="btn btn-gradient">
+                                Explore now
+                                <span class="dots"><i class="fas fa-ellipsis-h"></i></span>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="swiper-slide s">
+                    <div class="heroooo">
+                        <div class="container">
+
+                            <div class="main-heading">
+                                <h1 class="title" style="font-weight: 900;">AL-RAYAN</h1>
+                                <h2 class="subtitle" style="font-family: 'Beyond';">hotel & resort</h2>
+                            </div>
+                            <a href="#" class="btn btn-gradient">
+                                Explore now
+                                <span class="dots"><i class="fas fa-ellipsis-h"></i></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination"></div>
+            <!-- Add Arrows -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+
+
+
+
+
+        <!--
+            <div class="hero">
+                <div class="container">
+                    <div class="main-heading">
+                        <h1 class="title">AL-RAYAN</h1>
+                        <h2 class="subtitle">hotel & resort</h2>
+                    </div>
+                    <a hreg="#" class="btn btn-gradient">
+                        Explore now
+                        <span class="dots"><i class="fas fa-ellipsis-h"></i></span>
+                    </a>
+                </div>
+            </div> -->
+
+
+        <section class="booking">
+            <div class="container">
+
+            </div>
+        </section>
+
+
+
+
+        <section>
+            <div style="display: flex">
+
+                <div style="flex: 0 0 50%">
+                    <img src="alrayanimg/Sea Gratitude Photo Quote Serene & Calm Zoom Background.gif" class="regist" style="border: dashed 4px 	rgba(40,183,141,0.8);  box-shadow: 10px 15px 40px grey">
+                </div>
+                <div style="flex: 1">
+                    <h1 class="h" style="font-size: 40px; font-weight: bold;  padding-bottom:10px;">About Us:</h1>
+                    <h2 style="font-family: 'Indie Flower'; font-weight: bold; font-size: 20px">A passion for making moments &hearts;</h2>
+                    <p style="font-family: 'Indie Flower'; font-size: 15px">
+                        Al Rayan Hotels & Resorts is a modern, upscale hospitality company that is passionate about ‘making moments’, recognising that small gestures make a big difference to our guests, our owners and our people. We do ordinary things in an extraordinary way – a philosophy that has defined our brand’s success from the very start.
+                    </p>
+                    <p style="font-family: 'Indie Flower'; font-size: 15px">                        A global firm with Palestinian roots and a restaurant and hospitality heritage that dates back to the 2020, our approach to service has remained consistent; warm, intuitive, personal and uniquely . We also embrace innovation to meet ever-changing guest needs and continue to celebrate our rich culinary legacy, setting trends but never compromising on quality and authenticity. An international company with a growing footprint, we take a sustainable and responsible approach, caring for local communities and protecting the environment in the destinations where we operate.
+
+                        <br><br></p>
+                    <div class="wrapper">
+                        <div class="button" onclick="document.body.classList.add('active')">
+                            <span class="button-text">Guest</span>
+                            <div class="button-backgrounds">
+                                <div class="button-circle button-circle1"></div>
+                                <div class="button-circle button-circle2"></div>
+                                <div class="button-circle button-circle3"></div>
+                                <div class="button-circle button-circle4"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="wrapper">
+                        <div class="popup">
+                            <div class="popup-inside">
+                                <div class="backgrounds">
+                                    <div class="background"></div>
+                                    <div class="background background2"></div>
+                                    <div class="background background3"></div>
+                                    <div class="background background4"></div>
+                                    <div class="background background5"></div>
+                                    <div class="background background6"></div>
+                                </div>
+                            </div>
+                            <div class="content">
+                                <div class="content-wrapper">
+                                    <h1>Hello Our Dear Guest</h1>
+                                    <p>Do you like Al-Rayan Hotel?</p>
+                                    <p class="try-again" onclick="document.body.classList.remove('active')">Yes! I will visit you soon! &hearts;</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+
+
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-content-brand">
+                    <a href="index.html" class="logoo">
+                        <img class="logo-image" src="alrayanimg/log.png" alt="">
+                    </a>
+                    <div class="paragraph" style="font-family: 'Sacramento'; font-size:25px;">
+                        All copyright © 2020 are for Web Project Done by (Wa'ed Khalifa)
+
+                    </div>
+                </div>
+                <div class="social-media-wrap">
+                    <h4 class="footer-heading">Follow us</h4>
+                    <div class="social-media">
+                        <a href="#" class="sm-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="sm-link"><i class="fab fa-facebook-square"></i></a>
+                        <a href="#" class="sm-link"><i class="fab fa-instagram"></i></a>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="js/main.js"></script>
+    <script src="../package/swiper-bundle.min.js"></script>
+
+
+    <script>document.onreadystatechange = function () {
+        var state = document.readyState
+        if (state == 'interactive') {
+            document.getElementById('contentss').style.visibility="hidden";
+        } else if (state == 'complete') {
+            setTimeout(function(){
+                document.getElementById('interactive');
+                document.getElementById('load').style.visibility="hidden";
+                document.getElementById('contentss').style.visibility="visible";
+            },1000);
+        }
+    }</script>
+
+    <script>
+
+
+        var mySwiper = new Swiper('.s1', {
+            spaceBetween: 30,
+            centeredSlides: true,
+            autoplay: {
+                delay: 2500,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+
+
+        var mySwiper2 = new Swiper('.s2', {
+            effect: 'coverflow',
+            grabCursor: true,
+            centeredSlides: true,
+            slidesPerView: 'auto',
+            coverflowEffect: {
+                rotate: 50,
+                stretch: 0,
+                depth: 100,
+                modifier: 1,
+                slideShadows: true,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+            },
+        });
+    </script>
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="styles/bootstrap4/popper.js"></script>
+    <script src="styles/bootstrap4/bootstrap.min.js"></script>
+    <script src="plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+    <script src="plugins/easing/easing.js"></script>
+    <script src="js/custom.js"></script>
+</div>
+</body>
+</html>
